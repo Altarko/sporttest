@@ -1,0 +1,169 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 105px;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 75px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+
+.board{
+    width: 75%;
+    margin: 60px auto;
+
+    background: #fff;
+    /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+}
+.board .nav-tabs {
+    position: relative;
+    /* border-bottom: 0; */
+    /* width: 80%; */
+    margin: 40px auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+
+}
+
+.board > div.board-inner{
+    background-size: 30%;
+}
+
+p.narrow{
+    width: 60%;
+    margin: 10px auto;
+}
+
+.drop-shadow {
+    position: relative;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+}
+
+.drop-shadow:after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+.drop-shadow {
+    position: relative;
+}
+
+.drop-shadow:before,
+.drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    max-width: 300px;
+    box-shadow :0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+}
+
+.drop-shadow:after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+.raised {
+    -webkit-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+input[type=radio].css-checkbox {
+    display:none;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+    padding-left:24px;
+    height:19px;
+    display:inline-block;
+    line-height:19px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:19px;
+    cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+    background-position: 0 -19px;
+}
+label.css-label {
+    background-image:url(../images/csscheckbox.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.td-padding {
+    padding: 10px;
+}
+
+label {
+    font-weight: normal !important;
+    color: #555 !important;
+}
+
+.timer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-weight: bold;
+    font-size: 50pt;
+    color: rgba(0, 0, 0, 0.23);
+}
