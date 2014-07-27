@@ -9,7 +9,6 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -23,7 +22,7 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<!--<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,45 +34,100 @@
             <a class="navbar-brand" href="#">Project name</a>
         </div>
     </div>
-</div>
+</div>-->
 
 <!-- Begin page content -->
 <div class="container">
-    <div class="row" ng-controller="QuestionCard as card">
-        <div class="col-md-9 col-md-offset-1 well drop-shadow raised" ng-repeat="q in card.questions">
-            <h3>{{q.number}}. {{q.question}}</h3>
+
+    <div id="loginbox"  ng-controller="LoginboxCtrl" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">Пожалуйста, представьтесь</div>
+            </div>
+
+            <div style="padding-top:30px" class="panel-body" >
+                <form name="loginform" class="form-horizontal">
+                    <div style="margin-bottom: 25px" class="input-group has-error"
+                         ng-class="{'has-error': loginform.inputName.$invalid, 'has-success': !loginform.inputName.$invalid}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" autofocus="autofocus" placeholder="Фамилия Имя"
+                               name="inputName" ng-maxlength="40" ng-model="user.name" ng-pattern="namePattern" required>
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group has-error"
+                         ng-class="{'has-error': loginform.inputGroup.$invalid, 'has-success': !loginform.inputGroup.$invalid}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="text" class="form-control"  placeholder="группа"
+                               name="inputGroup" ng-model="user.group" ng-pattern="groupPattern" required>
+                    </div>
+
+
+                    <div style="margin-bottom: 25px" class="input-group has-error"
+                         ng-class="{'has-error': loginform.inputGroup.$invalid, 'has-success': !loginform.inputGroup.$invalid}">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i></span>
+                        <input type="text" class="form-control" placeholder="курс" tabindex="-1" ng-model="user.course"  readonly required>
+                    </div>
+
+
+                    <div style="margin-top:10px" class="form-group">
+                        <!-- Button -->
+                        <div class="col-sm-12 controls">
+                            <a id="btn-login" ng-href="#" ng-click="logIn()" class="btn"
+                               ng-class="{'btn-danger': !loginform.$valid, 'btn-success': loginform.$valid}" ng-disabled="!loginform.$valid">Войти</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:65%" class="text-muted" >
+                               Тестирование по дисциплине физическая культура &copy 2014
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="row" ng-controller="QuestionCard">
+        <div class="col-md-9 col-md-offset-1 well drop-shadow raised" ng-repeat="q in questions">
+            <h4 ng-bind-template="{{$index + 1}}. {{q.question}}"></h4>
             <hr/>
             <table>
                 <tr>
-                    <td class="td-padding"><input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A1" class="css-checkbox"/>
-                        <label for="radioQ{{q.id}}A1" class="css-label">{{q.variants.v1}}</label>
+                    <td class="td-padding">
+                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A1" ng-value="q.variants.v1" ng-model="answerFromStudent" class="css-checkbox"/>
+                        <label for="radioQ{{q.id}}A1" class="css-label" ng-bind="q.variants.v1 | lowercase"></label>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-padding">
-                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A2" class="css-checkbox"/>
-                        <label for="radioQ{{q.id}}A2" class="css-label">{{q.variants.v2}}</label>
+                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A2" ng-value="q.variants.v2" ng-model="answerFromStudent" class="css-checkbox"/>
+                        <label for="radioQ{{q.id}}A2" class="css-label" ng-bind="q.variants.v2 | lowercase"></label>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-padding">
-                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A3" class="css-checkbox"/>
-                        <label for="radioQ{{q.id}}A3" class="css-label">{{q.variants.v3}}</label>
+                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A3" ng-value="q.variants.v3" ng-model="answerFromStudent" class="css-checkbox"/>
+                        <label for="radioQ{{q.id}}A3" class="css-label" ng-bind="q.variants.v3 | lowercase"></label>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-padding">
-                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A4" class="css-checkbox"/>
-                        <label for="radioQ{{q.id}}A4" class="css-label">{{q.variants.v4}}</label>
+                        <input type="radio" name="question{{q.id}}" id="radioQ{{q.id}}A4" ng-value="q.variants.v4" ng-model="answerFromStudent" class="css-checkbox"/>
+                        <label for="radioQ{{q.id}}A4" class="css-label" ng-bind="q.variants.v4 | lowercase"></label>
                     </td>
                 </tr>
             </table>
+            <div class="text-muted">
+                <p>верный ответ: {{q.correctAnswer}}</p>
+                <p>ответ студента: {{answerFromStudent}}</p>
+            </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
-<div class="timer">15:00</div>
-
+<div class="timer" ng-controller="TimerCtrl" ng-bind-template="{{min | numberFixedLen:2}}:{{sec | numberFixedLen:2}}"></div>
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
     (function (i, s, o, g, r, a, m) {
@@ -111,7 +165,7 @@
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/nprogress/nprogress.js"></script>
+<script src="bower_components/ngprogress/build/ngProgress.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -121,6 +175,9 @@
 <script src="scripts/controllers/about.js"></script>
 <script src="scripts/controllers/questionCard.js"></script>
 <script src="scripts/services/questiondata.js"></script>
+<script src="scripts/controllers/timer.js"></script>
+<script src="scripts/filters/numberfixedlen.js"></script>
+<script src="scripts/controllers/loginbox.js"></script>
 <!-- endbuild -->
 </body>
 </html>
