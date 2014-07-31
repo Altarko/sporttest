@@ -14,5 +14,6 @@ angular.module('sportTestApp')
       'AngularJS',
       'Karma'
     ];
+        $scope.message = 'This is Add new order screen';
 
   });

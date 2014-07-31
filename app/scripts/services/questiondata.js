@@ -9,8 +9,8 @@
  */
 angular.module('sportTestApp')
   .service('Questiondata', function Questiondata() {
-        return {
-            'questions': [
+        return(
+            [
                 {
                     'id': 1,
                     'number': 1,
@@ -71,6 +71,5 @@ angular.module('sportTestApp')
                     },
                     'correctAnswer': '2'
                 }
-            ]
-        };
+            ]);
   });

@@ -7,36 +7,28 @@
  * # QuestionCard
  * Controller of the sportTestApp
  */
-angular.module('sportTestApp', ['ngProgress'])
-    .controller('QuestionCard', function ($scope, $http, ngProgress) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+angular.module('sportTestApp')
+    .controller('QuestionCard', function ($scope, $http, QuestionsForStudent, UserData) {
 
-        //курс студента
-        $scope.curriculum = 3;
+        // курс студента
+        //$scope.curriculum = 3;
 
-        //запускаем прогрессбар
-        ngProgress.color('green');
-        ngProgress.start();
+        // залогинился ли пользователь
+        $scope.userLogin = UserData.isAuthenticated();
 
-        var config = {
-            params: {
-                curriculum: $scope.curriculum,
-                limit: 5,
-                callback: 'JSON_CALLBACK'
-            }
-        };
-
-        //запрашиваем данные с сервера
-        var url = 'http://brothersdesign.ru/sporttest/requests/angular.php?';
-        $http.jsonp(url, config).success(function(data){
-            //останавливаем прогрессбар
-            ngProgress.complete();
-            $scope.questions = data;
+        // следим за состоянием логина, если залогинился, то отображаем список вопросов
+        $scope.$watch(UserData.isAuthenticated, function () {
+            $scope.userLogin = UserData.isAuthenticated();
+            // инициализация запроса к серверу
+            QuestionsForStudent.initQuestions();
+            // возвращаем вопросы
+            QuestionsForStudent.getQuestions().then(function(result){
+                $scope.questions = result.data;
+            });
         });
-
-        //ответ от студента
-        $scope.answerFromStudent = '';    });
+        // ответ студента
+        $scope.answerFromStudent = '';
+        
+        
+        
+    });
