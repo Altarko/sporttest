@@ -5,28 +5,16 @@
  * @name sportTestApp.controller:TimerCtrl
  * @description
  * # TimerCtrl
- * Controller of the sportTestApp
+ * Контроллер таймера
  */
 angular.module('sportTestApp')
     .controller('TimerCtrl', function ($scope, $timeout, UserData) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
 
-        // отображать ли таймер
-        $scope.timerShow = UserData.isAuthenticated();
-
-        $scope.$watch(UserData.isAuthenticated, function () {
-            console.log($scope.timerShow);
-            $scope.timerShow = UserData.isAuthenticated();
-            console.log($scope.timerShow);
-            //$scope.start();
-        });
+        // переменная для изменнения цвета таймера, когда осталось мало времени
+        $scope.timeAlert = false;
 
         //количество минут для прохождения теста
-        var MINUTES = 15;
+        var MINUTES = 1.1;
         //инициализируем начальное значение таймера
         $scope.sec = 0;
         $scope.min = MINUTES;
@@ -51,7 +39,18 @@ angular.module('sportTestApp')
 
         //когда время истекло
         $scope.$watch('counter', function () {
+            //если осталась минута
+            if ($scope.counter === 60) {
+                $scope.timerAlert = true;
+            }
             if ($scope.counter === 0) {
+                $scope.stop();
+            }
+        });
+
+        // останавливаем таймер, когда завершено тестирование
+        $scope.$watch(UserData.isComplete, function () {
+            if (UserData.isComplete()) {
                 $scope.stop();
             }
         });

@@ -11,8 +11,9 @@ angular.module('sportTestApp')
     .service('UserData', function UserData() {
 
         // данные пользователя
-        var user = {};
-        var authenticated  = false;
+        var user = {},
+            authenticated  = false,     // аутентифициорван
+            testingComplete = false;    // завершил тестироваие
 
         return {
             isAuthenticated: function () {
@@ -23,32 +24,28 @@ angular.module('sportTestApp')
                 return user;
             },
 
+            getCurriculum: function () {
+                return user.curriculum;
+            },
+
+            CompleteTesting: function () {
+                 testingComplete = true;
+            },
+
+            isComplete: function () {
+                return testingComplete;
+            },
+
             login: function(loginUser, callback) {
                 user =  loginUser;
                 authenticated = true;
                 callback(true);
-                //actual code for logging in taken out for brevity
             },
-
-            /*// устанавливает данных пользователя
-            setUserData: function (data) {
-                UserData = data;
-                //console.log(this.UserData);
-            },
-*/
 
             // сохраняет данные пользователя и результат тестирования
             saveUserData: function () {
 
-            },
-
-            setLogin: function () {
-                authenticated  = true;
             }
-            /*getLogin: function () {
-                //console.log(authenticated );
-                return authenticated ;
-            }*/
 
         };
     });

@@ -5,18 +5,19 @@
  * @name sportTestApp.controller:LoginboxCtrl
  * @description
  * # LoginboxCtrl
- * Controller of the sportTestApp
+ * Форма входа с проверкой полей
  */
 angular.module('sportTestApp')
   .controller('LoginboxCtrl', function ($scope, $location,  UserData) {
 
         // отображать ли форму входа
-       // $scope.showLoginBox = UserData.getLogin();
+        $scope.showLoginBox = true;
+
 
         //данные пользователя
         $scope.user = {
             name:       'Иванов Алексей',
-            group:      'М4',
+            group:      'М3',
             curriculum: '',
             course:     ''
         };
@@ -35,7 +36,13 @@ angular.module('sportTestApp')
                 try {
                     var re = /\d/gim;
                     var courses = $scope.user.group.match(re);
-                    $scope.user.curriculum = courses[0];
+                    $scope.user.curriculum = parseInt(courses[0], 10);
+
+                    // если курс 4, то сделать его 3
+                    if ($scope.user.curriculum === 4) {
+                        $scope.user.curriculum = 3;
+                    }
+
                     $scope.user.course = courses[0] + ' курс';
                 }
                 catch (e) {
@@ -46,18 +53,13 @@ angular.module('sportTestApp')
 
         // следим за валидностью поля группа
         $scope.$watch('loginform.inputGroup.$invalid', setCurriculum);
-
-
-
+        
         // действие по нажатию кнопки [Войти]
         $scope.logIn = function () {
-            //UserData.setUserData($scope.user);
-            //UserData.setLogin();
             UserData.login($scope.user, function (success) {
                 if (success) {
-
+                    $scope.showLoginBox = false;
                     $location.path('/questions');
-                    console.log($location.path());
                 }
             });
         };
